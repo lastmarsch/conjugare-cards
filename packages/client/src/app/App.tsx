@@ -1,12 +1,7 @@
-import { MainPage } from '@/pages/MainPage';
-import { Header } from '@/shared/ui/Header';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './config/router';
 import './styles/index.scss';
 
 export const App = () => {
-  return (
-    <>
-      <Header />
-      <MainPage />
-    </>
-  );
+  return <RouterProvider router={router} />;
 };
