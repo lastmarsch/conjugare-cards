@@ -23,9 +23,14 @@ export const MainPage = () => {
           <Button type='submit'>Căută</Button>
         </form>
 
-        <ConjugareCard verb={verb} />
-
-        <DownloadCard />
+        {verb.length > 0 ? (
+          <>
+            <ConjugareCard verb={verb} />
+            <DownloadCard />
+          </>
+        ) : (
+          <>Cardul va apărea aici. Caută ceva!</>
+        )}
       </div>
     </div>
   );

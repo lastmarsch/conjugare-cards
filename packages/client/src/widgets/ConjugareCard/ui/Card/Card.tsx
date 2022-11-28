@@ -1,5 +1,4 @@
 import { Conjugare } from '@/app/config/store';
-import DOMPurify from 'dompurify';
 import css from './Card.module.scss';
 
 type CardProps = Conjugare;
@@ -22,6 +21,33 @@ export const Card = (props: CardProps) => {
     prezent,
   } = props;
 
+  const conjGroups = [
+    {
+      name: '',
+      items: pronumele,
+    },
+    {
+      name: 'Prezent',
+      items: prezent,
+    },
+    {
+      name: 'Conjunctiv Prezent',
+      items: conjunctivPrezent,
+    },
+    {
+      name: 'Imperfect',
+      items: imperfect,
+    },
+    {
+      name: 'Perfect Simplu',
+      items: perfectSimplu,
+    },
+    {
+      name: 'Mai mult ca Perfect',
+      items: maiMultCaPerfect,
+    },
+  ];
+
   return (
     <div className={css.conjugareCard}>
       <div className={css.header}>
@@ -29,104 +55,54 @@ export const Card = (props: CardProps) => {
           <div className={css.titleCard}>
             <h2 dangerouslySetInnerHTML={{ __html: verb }} />
             <div className={css.tags}>
-              <span
-                className={css.tag}
-                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(grupa) }}
-              />
-              <span
-                className={css.tag}
-                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(conjugarea) }}
-              />
+              <span className={css.tag} dangerouslySetInnerHTML={{ __html: grupa }} />
+              <span className={css.tag} dangerouslySetInnerHTML={{ __html: conjugarea }} />
             </div>
           </div>
         </div>
         <div className={css.info}>
           <div className={css.infoGroup}>
             <h3 className={css.title}>Infinitiv Lung</h3>
-            <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(infinitivLung) }} />
+            <span dangerouslySetInnerHTML={{ __html: infinitivLung }} />
           </div>
           <div className={css.infoGroup}>
             <h3 className={css.title}>Participiu</h3>
-            <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(participiu) }} />
+            <span dangerouslySetInnerHTML={{ __html: participiu }} />
           </div>
           <div className={css.infoGroup}>
             <h3 className={css.title}>Gerunziu</h3>
-            <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(gerunziu) }} />
+            <span dangerouslySetInnerHTML={{ __html: gerunziu }} />
           </div>
           <div className={css.infoGroup}>
             <h3 className={css.title}>Imperativ</h3>
             <div className={css.row}>
               <div className={css.column}>
                 <h4 className={css.title}>sg.</h4>
-                <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(imperativ.sg) }} />
+                <span dangerouslySetInnerHTML={{ __html: imperativ.sg }} />
               </div>
               <div className={css.column}>
                 <h4 className={css.title}>pl.</h4>
-                <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(imperativ.pl) }} />
+                <span dangerouslySetInnerHTML={{ __html: imperativ.pl }} />
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className={css.conjugare}>
-        <div className={css.conjGroup}>
-          <div className={css.header}></div>
-          <div className={css.body}>
-            {pronumele.map((item, index) => (
-              <span key={index}>{item}</span>
-            ))}
-          </div>
-        </div>
-        <div className={css.conjGroup}>
-          <div className={css.header}>
-            <h5 className={css.title}>Prezent</h5>
-          </div>
-          <div className={css.body}>
-            {prezent.map((item, index) => (
-              <span key={index} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item) }} />
-            ))}
-          </div>
-        </div>
-        <div className={css.conjGroup}>
-          <div className={css.header}>
-            <h5 className={css.title}>Conjunctiv Prezent</h5>
-          </div>
-          <div className={css.body}>
-            {conjunctivPrezent.map((item, index) => (
-              <span key={index} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item) }} />
-            ))}
-          </div>
-        </div>
-        <div className={css.conjGroup}>
-          <div className={css.header}>
-            <h5 className={css.title}>Imperfect</h5>
-          </div>
-          <div className={css.body}>
-            {imperfect.map((item, index) => (
-              <span key={index} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item) }} />
-            ))}
-          </div>
-        </div>
-        <div className={css.conjGroup}>
-          <div className={css.header}>
-            <h5 className={css.title}>Perfect Simplu</h5>
-          </div>
-          <div className={css.body}>
-            {perfectSimplu.map((item, index) => (
-              <span key={index} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item) }} />
-            ))}
-          </div>
-        </div>
-        <div className={css.conjGroup}>
-          <div className={css.header}>
-            <h5 className={css.title}>Mai mult ca Perfect</h5>
-          </div>
-          <div className={css.body}>
-            {maiMultCaPerfect.map((item, index) => (
-              <span key={index} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item) }} />
-            ))}
-          </div>
-        </div>
+        {conjGroups.map(({ name, items }) => {
+          return (
+            <div key={name} className={css.conjGroup}>
+              <div className={css.header}>
+                <h5 className={css.title}>{name}</h5>
+              </div>
+              <div className={css.body}>
+                {items.map((item, index) => (
+                  <span key={index} dangerouslySetInnerHTML={{ __html: item }} />
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
