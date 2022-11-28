@@ -49,7 +49,7 @@ export const Card = (props: CardProps) => {
   ];
 
   return (
-    <div className={css.conjugareCard}>
+    <div id='conjugareCard' className={css.conjugareCard}>
       <div className={css.header}>
         <div className={css.titleCardContainer}>
           <div className={css.titleCard}>

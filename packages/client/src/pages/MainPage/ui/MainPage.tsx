@@ -1,7 +1,7 @@
+import { ConjugareCard } from '@/features/ConjugareCard';
 import { DownloadCard } from '@/features/DownloadCard';
 import { Button } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
-import { ConjugareCard } from '@/widgets/ConjugareCard';
 import { FormEvent, useCallback, useState } from 'react';
 import css from './MainPage.module.scss';
 
