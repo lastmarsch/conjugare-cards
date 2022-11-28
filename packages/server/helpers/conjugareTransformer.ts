@@ -60,7 +60,7 @@ export const conjugareTransformer = (html: string) => {
     const tableRows = paradigm.querySelectorAll('tr');
 
     const headerCells = tableRows[1].querySelectorAll('td ul');
-    conjugareObject.verb = headerCells[0]?.querySelector('li')?.innerHTML || '';
+    conjugareObject.verb = `a ${headerCells[0]?.querySelector('li')?.innerText}` || '';
     conjugareObject.infinitivLung = headerCells[1]?.querySelector('li')?.innerHTML || '';
     conjugareObject.participiu = headerCells[2]?.querySelector('li')?.innerHTML || '';
     conjugareObject.gerunziu = headerCells[3]?.querySelector('li')?.innerHTML || '';

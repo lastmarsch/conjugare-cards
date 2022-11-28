@@ -2,6 +2,7 @@ import { DesprePage } from '@/pages/DesprePage';
 import { MainPage } from '@/pages/MainPage';
 import { Layout } from '@/widgets/Layout';
 import { createBrowserRouter, Link, Navigate } from 'react-router-dom';
+import { ErrorBoundary } from './ErrorBoundary';
 
 export enum RouterPaths {
   MAIN = '/',
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
         body={<MainPage />}
       />
     ),
+    errorElement: <ErrorBoundary />,
   },
   {
     path: RouterPaths.DESPRE,
@@ -35,6 +37,7 @@ export const router = createBrowserRouter([
         body={<DesprePage />}
       />
     ),
+    errorElement: <ErrorBoundary />,
   },
   {
     path: RouterPaths.OTHER,

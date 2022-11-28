@@ -1,39 +1,25 @@
-import css from './ConjugareCard.module.scss';
+import { Conjugare } from '@/app/config/store';
+import DOMPurify from 'dompurify';
+import css from './Card.module.scss';
 
-interface ConjugareCardProps {
-  verb: string;
-  grupa: string;
-  conjugarea: string;
-  infinitivLung: string;
-  participiu: string;
-  gerunziu: string;
-  imperativ: {
-    sg: string;
-    pl: string;
-  };
-  prezent: string[];
-  conjunctivPrezent: string[];
-  imperfect: string[];
-  perfectSimplu: string[];
-  maiMultCaPerfect: string[];
-}
+type CardProps = Conjugare;
 
 const pronumele = ['eu', 'tu', 'el, ea', 'noi', 'voi', 'ei, ele'];
 
-export const ConjugareCard = (props: ConjugareCardProps) => {
+export const Card = (props: CardProps) => {
   const {
     verb,
-    grupa,
     conjugarea,
-    infinitivLung,
-    participiu,
-    gerunziu,
-    imperativ,
-    prezent,
     conjunctivPrezent,
+    gerunziu,
+    grupa,
+    imperativ,
     imperfect,
-    perfectSimplu,
+    infinitivLung,
     maiMultCaPerfect,
+    participiu,
+    perfectSimplu,
+    prezent,
   } = props;
 
   return (
@@ -41,36 +27,42 @@ export const ConjugareCard = (props: ConjugareCardProps) => {
       <div className={css.header}>
         <div className={css.titleCardContainer}>
           <div className={css.titleCard}>
-            <h2>{verb}</h2>
+            <h2 dangerouslySetInnerHTML={{ __html: verb }} />
             <div className={css.tags}>
-              <span className={css.tag}>{grupa}</span>
-              <span className={css.tag}>{conjugarea}</span>
+              <span
+                className={css.tag}
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(grupa) }}
+              />
+              <span
+                className={css.tag}
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(conjugarea) }}
+              />
             </div>
           </div>
         </div>
         <div className={css.info}>
           <div className={css.infoGroup}>
             <h3 className={css.title}>Infinitiv Lung</h3>
-            <span>{infinitivLung}</span>
+            <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(infinitivLung) }} />
           </div>
           <div className={css.infoGroup}>
             <h3 className={css.title}>Participiu</h3>
-            <span>{participiu}</span>
+            <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(participiu) }} />
           </div>
           <div className={css.infoGroup}>
             <h3 className={css.title}>Gerunziu</h3>
-            <span>{gerunziu}</span>
+            <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(gerunziu) }} />
           </div>
           <div className={css.infoGroup}>
             <h3 className={css.title}>Imperativ</h3>
             <div className={css.row}>
               <div className={css.column}>
                 <h4 className={css.title}>sg.</h4>
-                <span>{imperativ.sg}</span>
+                <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(imperativ.sg) }} />
               </div>
               <div className={css.column}>
                 <h4 className={css.title}>pl.</h4>
-                <span>{imperativ.pl}</span>
+                <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(imperativ.pl) }} />
               </div>
             </div>
           </div>
@@ -91,7 +83,7 @@ export const ConjugareCard = (props: ConjugareCardProps) => {
           </div>
           <div className={css.body}>
             {prezent.map((item, index) => (
-              <span key={index}>{item}</span>
+              <span key={index} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item) }} />
             ))}
           </div>
         </div>
@@ -101,7 +93,7 @@ export const ConjugareCard = (props: ConjugareCardProps) => {
           </div>
           <div className={css.body}>
             {conjunctivPrezent.map((item, index) => (
-              <span key={index}>{item}</span>
+              <span key={index} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item) }} />
             ))}
           </div>
         </div>
@@ -111,7 +103,7 @@ export const ConjugareCard = (props: ConjugareCardProps) => {
           </div>
           <div className={css.body}>
             {imperfect.map((item, index) => (
-              <span key={index}>{item}</span>
+              <span key={index} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item) }} />
             ))}
           </div>
         </div>
@@ -121,7 +113,7 @@ export const ConjugareCard = (props: ConjugareCardProps) => {
           </div>
           <div className={css.body}>
             {perfectSimplu.map((item, index) => (
-              <span key={index}>{item}</span>
+              <span key={index} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item) }} />
             ))}
           </div>
         </div>
@@ -131,7 +123,7 @@ export const ConjugareCard = (props: ConjugareCardProps) => {
           </div>
           <div className={css.body}>
             {maiMultCaPerfect.map((item, index) => (
-              <span key={index}>{item}</span>
+              <span key={index} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item) }} />
             ))}
           </div>
         </div>

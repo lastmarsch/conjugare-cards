@@ -1,45 +1,31 @@
-import { Searchbar } from '@/features/Searchbar';
-import { ConjugareCard } from '@/shared/ui/ConjugareCard';
+import { DownloadCard } from '@/features/DownloadCard';
+import { Button } from '@/shared/ui/Button';
+import { Input } from '@/shared/ui/Input';
+import { ConjugareCard } from '@/widgets/ConjugareCard';
+import { FormEvent, useCallback, useState } from 'react';
 import css from './MainPage.module.scss';
 
 export const MainPage = () => {
+  const [verb, setVerb] = useState('');
+
+  const onSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const verb = new FormData(form).get('verb')?.toString() || '';
+    setVerb(verb);
+  }, []);
+
   return (
     <div className={css.mainPage}>
       <div className={css.container}>
-        <Searchbar />
-        <ConjugareCard
-          {...{
-            verb: 'a face',
-            grupa: 'grupa a III-a',
-            conjugarea: 'conjugarea a IX-a',
-            infinitivLung: 'facere',
-            participiu: 'făcut',
-            gerunziu: 'făcând',
-            imperativ: {
-              sg: 'fă',
-              pl: 'faceți, făceți',
-            },
-            prezent: ['fac', 'faci', 'face', 'facem', 'faceți', 'fac'],
-            conjunctivPrezent: [
-              '(să) fac',
-              '(să) faci',
-              '(să) facă',
-              '(să) facem',
-              '(să) faceți',
-              '(să) facă',
-            ],
-            imperfect: ['făceam', 'făceai', 'făcea', 'făceam', 'făceați', 'făceau'],
-            perfectSimplu: ['făcui', 'făcuși', 'făcu', 'făcurăm', 'făcurăți', 'făcură'],
-            maiMultCaPerfect: [
-              'făcusem',
-              'făcuseși',
-              'făcuse',
-              'făcuserăm',
-              'făcuserăți',
-              'făcuseră',
-            ],
-          }}
-        />
+        <form className={css.searchBar} onSubmit={onSubmit}>
+          <Input placeholder='Verb' name='verb' />
+          <Button type='submit'>Căută</Button>
+        </form>
+
+        <ConjugareCard verb={verb} />
+
+        <DownloadCard />
       </div>
     </div>
   );
