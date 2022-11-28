@@ -1,0 +1,16 @@
+:root {
+  --text-color: #222;
+  --background-color: #fafafa;
+  --secondary-text-color: #666;
+
+  // title
+  --title-font-family: 'Kaushan Script', cursive;
+  --title-font: 400 36px / 36px var(--title-font-family);
+
+  // regular
+  --regular-font-family: 'Playfair Display', serif;
+  --regular-font: 400 24px / 24px var(--regular-font-family);
+
+  // small
+  --small-font: 400 20px / 20px var(--regular-font-family);
+}
