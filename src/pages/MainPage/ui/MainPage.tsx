@@ -17,7 +17,7 @@ export const MainPage = () => {
     setVerb(verb);
   }, []);
 
-  const { data, isLoading, error } = useGetVerbQuery(verb);
+  const { data, isLoading, error } = useGetVerbQuery(verb, { skip: verb.length === 0 });
 
   return (
     <div className={css.mainPage}>
