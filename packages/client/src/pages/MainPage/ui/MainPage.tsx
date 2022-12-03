@@ -1,7 +1,9 @@
-import { ConjugareCard } from '@/features/ConjugareCard';
+import { useGetVerbQuery } from '@/app/config/store';
+import { Card } from '@/features/Card';
 import { DownloadCard } from '@/features/DownloadCard';
 import { Button } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
+import { Loader } from '@/shared/ui/Loader';
 import { FormEvent, useCallback, useState } from 'react';
 import css from './MainPage.module.scss';
 
@@ -15,6 +17,8 @@ export const MainPage = () => {
     setVerb(verb);
   }, []);
 
+  const { data, isLoading, error } = useGetVerbQuery(verb);
+
   return (
     <div className={css.mainPage}>
       <div className={css.container}>
@@ -24,12 +28,18 @@ export const MainPage = () => {
         </form>
 
         {verb.length > 0 ? (
-          <>
-            <ConjugareCard verb={verb} />
-            <DownloadCard />
-          </>
+          error ? (
+            <>Scuzați, cuvintele sau expresiile alese nu pot fi găsite. 😢</>
+          ) : isLoading ? (
+            <Loader />
+          ) : data ? (
+            <>
+              <Card {...data} />
+              <DownloadCard />
+            </>
+          ) : null
         ) : (
-          <>Cardul va apărea aici. Caută ceva!</>
+          <>Cartea va apărea aici. Caută ceva!</>
         )}
       </div>
     </div>
