@@ -17,7 +17,7 @@ export const MainPage = () => {
     setVerb(verb);
   }, []);
 
-  const { data, isLoading, error } = useGetVerbQuery(verb, { skip: verb.length === 0 });
+  const { data, isLoading, isFetching, error } = useGetVerbQuery(verb, { skip: verb.length === 0 });
 
   return (
     <div className={css.mainPage}>
@@ -30,7 +30,7 @@ export const MainPage = () => {
         {verb.length > 0 ? (
           error ? (
             <>Scuzați, cuvintele sau expresiile alese nu pot fi găsite. 😢</>
-          ) : isLoading ? (
+          ) : isLoading || isFetching ? (
             <Loader />
           ) : data ? (
             <>

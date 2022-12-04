@@ -40,6 +40,12 @@
 
   border: 2px solid var(--text-color);
   border-radius: 5px;
+
+  h2 {
+    font: var(--regular-font);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 }
 
 .tags {
